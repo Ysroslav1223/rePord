@@ -111,8 +111,8 @@ export const MainImg = () => {
   const beforeAfterCases = cases.slice(0, 3); 
 
   return (
-    <div className="flex flex-col items-center w-full" ref={containerRef}>
-        <header className='fixed top-0 left-0 w-full z-40 py-6 bg-transparent'>
+    <div className="flex flex-col items-center w-full overflow-x-hidden" ref={containerRef}>
+        <header className='fixed top-0 left-0 w-full z-40 py-6 '>
         <div className="mx-auto px-6 ">
           <h3 className="text-xl font-bold text-white">
             Продажа дизайна
@@ -132,11 +132,17 @@ export const MainImg = () => {
           </h3>
         </div>
       </motion.div>
-      <section className="min-h-screen w-full flex flex-col justify-center items-center text-center p-10 pt-50 bg-[#080808] text-white relative z-0">
+      <section className="min-h-screen w-full flex flex-col justify-center items-center text-center p-10 pt-80   bg-[radial-gradient(ellipse_70%_40%_at_bottom_right,_#2f2a37_85%,_#c8ec68_150%)] text-white relative z-0">
+        <div className="absolute inset-0 bg-[#2f2a37] opacity-60 z-0"></div>
+  
+  <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#2f2a37] rounded-full blur-3xl opacity-40"></div>
+  <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-[#2f2a37] rounded-full blur-2xl opacity-50"></div>
+  
+  <div className="absolute bottom-0 right-0 w-48 h-48 bg-[#c8ec68] rounded-full blur-2xl opacity-30 -mr-24 -mb-24"></div>
         <motion.h1 
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
-          className="text-4xl font-bold mb-6"
+          className="text-5xl font-bold mb-6 relative z-20"
         >
           reProd
         </motion.h1>
@@ -144,34 +150,35 @@ export const MainImg = () => {
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ delay: 0.2 }}
-          className="text-lg max-w-2xl mb-8 "
+          className="text-lg max-w-2xl mb-8 relative z-20"
         >
          Мы - видеопродакшн полного цикла <br/>Спецы в вертикальном контенте
         </motion.p>
         <motion.button 
           onClick={scrollToCases}  
-          className='bg-white text-black hover:bg-black hover:text-white transition-colors duration-300 text-base font-bold w-[96vw]  border border-black py-3 rounded-4xl lg:w-100'
+          className='bg-white relative z-20 text-black hover:bg-black hover:text-white transition-colors duration-300 text-base font-bold w-[96vw]  border border-black py-3 rounded-4xl lg:w-100'
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          Посмотреть кейсы
+          Узнать больше
         </motion.button>
       </section>
       <section className="w-full py-20 px-10 bg-[#080808] text-white relative z-0" ref={caseRef}>
+        <div className="absolute -top-32 left-0 w-full h-32 bg-gradient-to-b from-transparent to-[#080808]"></div>
         <div className="max-w-6xl mx-auto">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="text-4xl font-bold text-center mb-12"
           >
-            Кто мы такие
+            О нас
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <motion.div 
               initial={{ opacity: 0, y: -20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-center p-6"
+              className="text-center p-6 "
             >
               <h3 className="text-xl font-bold mb-4">Полный цикл</h3>
               <p className="text-gray-400">
@@ -203,14 +210,15 @@ export const MainImg = () => {
           </div>
         </div>
       </section>
-      <section ref={consultationRef} className="w-full py-20 px-10 bg-gradient-to-br from-blue-50 to-indigo-100">
+      <section ref={consultationRef} className="w-full py-20 px-10  bg-[radial-gradient(ellipse_70%_40%_at_bottom_left,_#c8ec68_0%,_#2f2a37_100%,_#080808_150%)]">
+        
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
           >
-            <h2 className="text-4xl font-bold mb-6">Бесплатная консультация</h2>
-            <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+            <h2 className="text-4xl text-white font-bold mb-6">Бесплатная консультация</h2>
+            <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
               Придумаем идею, цели, форматы и бюджет проекта вместе с вами
             </p>
             <motion.button
@@ -224,7 +232,7 @@ export const MainImg = () => {
           </motion.div>
         </div>
       </section>
-      <section  className="w-full py-20 px-4 bg-[#080808] text-white">
+      <section  className="w-full py-20 px-4 bg-[radial-gradient(ellipse_70%_40%_at_top_left,_#c8ec68_0%,_#2f2a37_100%,_#080808_150%)] text-white">
         <div className="max-w-6xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -232,9 +240,6 @@ export const MainImg = () => {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold mb-4">Наши кейсы</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Реальные примеры работ, которые принесли результат нашим клиентам
-            </p>
           </motion.div>
           
           <motion.div 
@@ -291,63 +296,50 @@ export const MainImg = () => {
               </div>
         </div>
         <div className='flex flex-col text-center justify-end mt-30 relative top-8'>
-           <h2 className='text-white text-2xl font-bold text-center'>Как вы сохраняете время работая с <br/>нами </h2>
+           <motion.h2 initial={{opacity:0,y:-100}} whileInView={{opacity:1,y:0}} transition={{duration:0.7}}
+           className='text-white text-2xl font-bold text-center'>Как вы сохраняете время работая с <br/>нами </motion.h2>
         </div>
        
       </section>
-      
-    {/* <section className=' w-full flex items-center justify-center py-20 bg-gray-50 relative'>
-  <div className='absolute   w-1 bg-gray-300 h-full hidden lg:block'></div>
-  <div className='flex flex-col items-center gap-16 max-w-6xl mx-auto px-4 relative'>
-    <motion.div 
-      className='flex w-full lg:flex-row items-center gap-8 relative'
-      initial={{ opacity: 0, x: 100 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.7 }}
-    >
-      <div className='absolute  h-1 bg-gray-300 hidden lg:block'></div>
-      
-      <div className='hidden lg:block w-1/2'></div>
-      <div className='w-full lg:w-1/2 h-60 bg-black rounded-3xl flex items-center justify-center shadow-2xl p-6 relative z-10'>
-        <span className='text-white text-2xl font-bold text-center'>
-          Разработка визуальной идеи, от вас только задумка!
-        </span>
-      </div>
-    </motion.div>
-    <motion.div 
-      className='flex flex-col lg:flex-row items-center gap-8 w-full relative'
-      initial={{ opacity: 0, x: -100 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.7, delay: 0.2 }}
-    >
-      <div className='absolute  bg-gray-300 hidden lg:block'></div>
-      
-      <div className='w-full lg:w-1/2 h-60 bg-black rounded-3xl flex items-center justify-center shadow-2xl p-6 relative z-10'>
-        <span className='text-white text-2xl font-bold text-center'>
-          Съемка полностью на нас: подбор студии, создание образа, постановка в кадре
-        </span>
-      </div>
-      <div className='hidden lg:block w-1/2'></div>
-    </motion.div>
-    <motion.div 
-      className='flex flex-col lg:flex-row items-center gap-8 w-full relative'
-      initial={{ opacity: 0, x: 100 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.7, delay: 0.4 }}
-    >
-      <div className='absolute left-1/2 top-1/2  w-1/4 h-1 bg-gray-300 hidden lg:block'></div>
-      
-      <div className='hidden lg:block w-1/2'></div>
-      <div className='w-full lg:w-1/2 h-60 bg-black rounded-3xl flex items-center justify-center shadow-2xl p-6 relative z-10'>
-        <span className='text-white text-2xl font-bold text-center'>
-          Монтаж полностью на нас, от вас - сказать правки и принять работу
-        </span>
-      </div>
-    </motion.div>
-
+        <section className='w-full py-20 relative overflow-hidden bg-[radial-gradient(ellipse_at_right,#c8ec68__15%,_#2f2a37_50%,_#080808_70%)]'>
+  <div className='flex flex-col relative z-10'>
+    <div className='flex flex-row mt-15'>    
+      <motion.div className='w-[50vw]'></motion.div>
+      <motion.div 
+        initial={{opacity:0,x:100}}
+        whileInView={{opacity:1,x:0}}
+        transition={{duration:0.7}}
+        className='w-[80vw] h-30 bg-black/50 backdrop-blur-sm rounded-xl px-4 pt-1 mr-2 flex justify-center items-center '
+      >
+        <p className='text-white text-center pb-2 font-bold'>поможем в разработке виральной идеи, от вас только задумка!</p>
+      </motion.div>
+    </div>
+    
+    <div className='flex flex-row mt-15'>
+      <motion.div 
+        className='w-[80vw] h-30 bg-black/50  rounded-xl px-4 pt-1 ml-2 flex justify-center items-center'
+        initial={{opacity:0,x:-100}}
+        whileInView={{opacity:1,x:0}}
+        transition={{duration:0.7}}
+      >
+        <p className='text-white justify-center text-center font-bold'>Съемка полностьб на нас, подбирае студию, образ, продюссер ставит вас в кадре</p>
+      </motion.div>
+      <motion.div className='w-[50vw]'></motion.div>
+    </div>
+    
+    <div className='flex flex-row mt-15 mb-15'>    
+      <motion.div className='w-[50vw]'></motion.div>
+      <motion.div 
+        initial={{opacity:0,x:100}}
+        whileInView={{opacity:1,x:0}}
+        transition={{duration:0.7}}
+        className='w-[80vw] h-30 bg-black/50  rounded-xl px-4 pt-1 ml-2 flex justify-center items-center mr-2 '
+      >
+        <p className='text-white justify-center text-center font-bold'>Монтаж и правки полностью на нас, от вас - принять работу и указать пожелания</p>
+      </motion.div>
+    </div>
   </div>
 </section>
-    */}
       {/* <section className="w-full  bg-white">
         <div className="max-w-6xl mx-auto">
           <motion.div 
@@ -395,7 +387,7 @@ export const MainImg = () => {
         </div>
       </section> */}
       
-      <section className="w-full py-20 px-10 bg-gray-900 text-white">
+      <section className="w-full py-20 px-10  bg-[#080808] text-white">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
