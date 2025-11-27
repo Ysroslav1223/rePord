@@ -1,7 +1,14 @@
-import { motion, animate,useScroll, useTransform } from 'framer-motion';
-import { useRef, useState } from 'react';
-// import img1 from '../../../public/images/16pro max.png'
+import { motion, animate,useScroll, useTransform,AnimatePresence } from 'framer-motion';
+import { useRef, useState,useEffect } from 'react';
+import img1 from '../../../public/images/tik-tok.jpg'
+import img2 from '../../../public/images/tik-tok2.jpg'
+import img3 from '../../../public/images/case3.jpg'
+import img4 from '../../../public/images/case4.jpg'
+import img5 from '../../../public/images/case5.jpg'
+import img6 from '../../../public/images/case6.jpg'
 import { GoArrowUpRight } from "react-icons/go";
+import { ContactForm } from '../contact-form/contact-from';
+import { Link } from 'react-router-dom';
 
 export const MainImg = () => {
   const caseRef = useRef(null);
@@ -9,98 +16,141 @@ export const MainImg = () => {
   const containerRef = useRef(null);
   
   const [category, setCategory] = useState('all');
+  const [isOpen,setIsOpen]=useState(false)
+  const[isOpenModal,setIsOpenModal]=useState(false)
 
-    const { scrollY } = useScroll();
+ 
+  const [willChange, setWillChange] = useState(false);
 
-   const logoYPosition = useTransform(
+ 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+
+    const checkMobile = () => {
+      return window.innerWidth <= 768;
+    };
+    
+    setIsMobile(checkMobile());
+    
+    const handleResize = () => {
+      setIsMobile(checkMobile());
+    };
+
+    window.addEventListener('resize', handleResize);
+    
+  
+    const timer = setTimeout(() => {
+      setWillChange(true);
+    }, 100);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timer);
+    };
+  }, []);
+
+  const { scrollY } = useScroll();
+
+  const logoYPosition = useTransform(
     scrollY,
     [0, 100],
-    [-60, 0]  
+    [-75, 0]  
   );
 
-
-
-  const scrollToCases = () => {
-    if (caseRef.current) {
-      const top = caseRef.current.offsetTop;
-      animate(window.scrollY, top, {
-        duration: 0.4,
-        onUpdate(value) {
-          window.scrollTo(0, value);
-        },
-      });
+ 
+  const scrollToElement = (element) => {
+    if (element.current) {
+      const top = element.current.offsetTop;
+  
+      if (isMobile) {
+        window.scrollTo({ top, behavior: 'smooth' });
+      } else {
+        animate(window.scrollY, top, {
+          duration: 0.4,
+          onUpdate(value) {
+            window.scrollTo(0, value);
+          },
+        });
+      }
     }
   };
 
-  const scrollToConsultation = () => {
-    if (consultationRef.current) {
-      const top = consultationRef.current.offsetTop;
-      animate(window.scrollY, top, {
-        duration: 0.4,
-        onUpdate(value) {
-          window.scrollTo(0, value);
-        },
-      });
-    }
+  const scrollToCases = () => scrollToElement(caseRef);
+
+
+  const handleClickForm = ()=>{
+    setIsOpen(false)
+    setIsOpenModal(true)
+  }
+
+  const mobileOptimizedAnimation = {
+    initial: isMobile ? { opacity: 1 } : { opacity: 0, y: 20 },
+    whileInView: isMobile ? { opacity: 1 } : { opacity: 1, y: 0 },
+    transition: { duration: isMobile ? 0.9 : 0.9 }
   };
+
+ 
+
+ 
   const cases = [
     { 
       id: 1, 
-      title: 'Музыкальный клип - "Лето в городе"', 
+      title: ' Тревел блог Броукдэйли', 
       category: 'music', 
-      img: "",
+      img: img1,
       beforeImg: '/before1.jpg',
-      afterImg: '/after1.jpg',
+      link: 'https://www.tiktok.com/@brokedaily0?_r=1&_t=ZN-91TxZvdf8qM',
       description: 'Полный цикл производства музыкального клипа для начинающего артиста',
       stats: { reach: '2.5M', engagement: '15%', growth: '+300%' }
     },
     { 
       id: 2, 
-      title: 'Реклама кофейни Urban', 
+      title: 'Музыкальное сми "88viral"', 
       category: 'ads', 
-      img: '/ads1.jpg',
+      img: img2,
       beforeImg: '/before2.jpg',
-      afterImg: '/after2.jpg',
+      link: 'https://www.tiktok.com/@888viral?_r=1&_t=ZN-91TxWTV39oU',
       description: 'Вертикальные рекламные ролики для социальных сетей',
       stats: { reach: '1.8M', engagement: '12%', growth: '+250%' }
     },
     { 
       id: 3, 
-      title: 'Мастерская деревянных изделий', 
+      title: 'Певец RAUFFF', 
       category: 'craft', 
-      img: '/craft1.jpg',
+      img: img3,
       beforeImg: '/before3.jpg',
-      afterImg: '/after3.jpg',
+      link: 'https://www.instagram.com/iam_raufff/',
       description: 'Контент-стратегия для мастера по дереву',
       stats: { reach: '850K', engagement: '18%', growth: '+400%' }
     },
     { 
       id: 4, 
-      title: 'Эксперт по финансам', 
+      title: 'Влог из Европы', 
       category: 'expert', 
-      img: '/expert1.jpg',
+      img: img5,
       beforeImg: '/before4.jpg',
-      afterImg: '/after4.jpg',
+      link: 'https://youtu.be/kbx_sgRn9ZI?si=tHSk91v42MXIll01',
       description: 'Личный бренд финансового консультанта',
       stats: { reach: '1.2M', engagement: '22%', growth: '+350%' }
     },
     { 
       id: 5, 
-      title: 'Музыкальный фестиваль', 
+      title: 'Музыка', 
       category: 'music', 
-      img: '/music2.jpg',
+      img: img4,
       beforeImg: '/before5.jpg',
-      afterImg: '/after5.jpg',
+      link: 'https://www.instagram.com/o.k_pro',
       description: 'Охват мероприятия через вертикальный контент',
       stats: { reach: '3.1M', engagement: '14%', growth: '+280%' }
     },
     { 
       id: 6, 
-      title: 'Локальный бренд одежды', 
+      title: 'Ресторан "Gambit"', 
       category: 'ads', 
-      img: '/ads2.jpg',
+      img: img6,
       beforeImg: '/before6.jpg',
-      afterImg: '/after6.jpg',
+      link: 'https://www.instagram.com/restaurant_gambit?igsh=MW54cHd5c3Q4Z24yaA==',
       description: 'Продвижение через сторис и рилсы',
       stats: { reach: '950K', engagement: '16%', growth: '+320%' }
     },
@@ -110,38 +160,90 @@ export const MainImg = () => {
 
   const beforeAfterCases = cases.slice(0, 3); 
 
+  
+useEffect(() => {
+  if (isOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+
+  return () => {
+    document.body.style.overflow = "";
+  };
+}, [isOpen]);
+
+
   return (
-    <div className="flex flex-col items-center w-full overflow-x-hidden" ref={containerRef}>
+    <div className="flex flex-col items-center w-full overflow-x-hidden " ref={containerRef}>
+       <AnimatePresence className=''>
+            {isOpen && (
+            <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)}
+            className="fixed inset-0 bg-black/80 backdrop-blur-md z-60 flex justify-center items-center  "
+            >
+            <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white w-full h-full p-5 rounded-none md:rounded-2xl md:w-[550px] md:h-132 "
+            >
+          
+            <div className="flex justify-between items-center mb-4 ">
+            <h2 className="text-2xl font-bold">Связаться с нами</h2>
+            <button onClick={()=>handleClickForm()} className="text-2xl font-bold">×</button>
+            </div>
+            <ContactForm className=''/>
+           
+            </motion.div>
+            </motion.div>
+            )}
+            </AnimatePresence>
+ 
         <header className='fixed top-0 left-0 w-full z-40 py-6 '>
         <div className="mx-auto px-6 ">
           <h3 className="text-xl font-bold text-white">
-            Продажа дизайна
+           reProd
           </h3>
         </div>
       </header>
-
-      <motion.div 
+       <motion.div 
         className='fixed top-0 left-0 w-full z-50 py-4 bg-white shadow-lg'
         style={{
-          y: logoYPosition
+          y: logoYPosition,
+          
+          willChange: willChange ? 'transform' : 'auto'
         }}
       >
-        <div className="mx-auto px-6">
+        <div className="mx-auto px-6 flex flex-row justify-between">
           <h3 className="text-xl font-bold text-black">
-            logo
+            reProd
           </h3>
+          <div className=''>
+            <button onClick={()=>setIsOpen(true)} className='border border-black rounded-4xl px-4 py-2 mt-[-5px] text-[14px] bg-black text-white hover:bg-white hover:text-black transition-colors duration-300 text-base' >Связаться</button>
+          </div>
+          
         </div>
       </motion.div>
-      <section className="min-h-screen w-full flex flex-col justify-center items-center text-center p-10 pt-80   bg-[radial-gradient(ellipse_70%_40%_at_bottom_right,_#2f2a37_85%,_#c8ec68_150%)] text-white relative z-0">
+          
+    
+      <section className="min-h-screen w-full flex flex-col justify-center items-center text-center p-10 pt-40   bg-[radial-gradient(ellipse_70%_40%_at_bottom_right,_#2f2a37_85%,_#c8ec68_150%)] text-white relative z-0">
+        
         <div className="absolute inset-0 bg-[#2f2a37] opacity-60 z-0"></div>
   
-  <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#2f2a37] rounded-full blur-3xl opacity-40"></div>
-  <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-[#2f2a37] rounded-full blur-2xl opacity-50"></div>
-  
-  <div className="absolute bottom-0 right-0 w-48 h-48 bg-[#c8ec68] rounded-full blur-2xl opacity-30 -mr-24 -mb-24"></div>
+        <div className={`absolute top-1/4 left-10 w-96 h-96 bg-[#2f2a37] rounded-full  blur-3xl opacity-40`}></div>
+        <div className={`absolute bottom-1/3 right-1/4 w-64 h-64 bg-[#2f2a37] rounded-full blur-2xl opacity-50`}></div>
+        
+        <div className={`absolute bottom-0 right-0 w-48 h-48 bg-[#c8ec68] rounded-full blur-2xl opacity-30 -mr-24 -mb-24`}></div>
+        
         <motion.h1 
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: isMobile ? 0.5 : 0.8 }}
           className="text-5xl font-bold mb-6 relative z-20"
         >
           reProd
@@ -149,7 +251,7 @@ export const MainImg = () => {
         <motion.p 
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.2, duration: isMobile ? 0.5 : 0.8 }}
           className="text-lg max-w-2xl mb-8 relative z-20"
         >
          Мы - видеопродакшн полного цикла <br/>Спецы в вертикальном контенте
@@ -157,27 +259,28 @@ export const MainImg = () => {
         <motion.button 
           onClick={scrollToCases}  
           className='bg-white relative z-20 text-black hover:bg-black hover:text-white transition-colors duration-300 text-base font-bold w-[96vw]  border border-black py-3 rounded-4xl lg:w-100'
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={!isMobile ? { scale: 1.05 } : {}}
+          whileTap={!isMobile ? { scale: 0.95 } : {}}
         >
           Узнать больше
         </motion.button>
       </section>
+      
       <section className="w-full py-20 px-10 bg-[#080808] text-white relative z-0" ref={caseRef}>
+       
         <div className="absolute -top-32 left-0 w-full h-32 bg-gradient-to-b from-transparent to-[#080808]"></div>
         <div className="max-w-6xl mx-auto">
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+           {...mobileOptimizedAnimation}
+           transition={{delay:0.2, duration:0.5}}
             className="text-4xl font-bold text-center mb-12"
           >
             О нас
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <motion.div 
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
+              {...mobileOptimizedAnimation}
+              transition={{delay:0.3, duration:0.5}}
               className="text-center p-6 "
             >
               <h3 className="text-xl font-bold mb-4">Полный цикл</h3>
@@ -186,9 +289,8 @@ export const MainImg = () => {
               </p>
             </motion.div>
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              {...mobileOptimizedAnimation}
+              transition={{delay:0.4, duration:0.6}}
               className="text-center p-6"
             >
               <h3 className="text-xl font-bold mb-4">Вертикальный формат</h3>
@@ -197,9 +299,8 @@ export const MainImg = () => {
               </p>
             </motion.div>
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+              {...mobileOptimizedAnimation}
+               transition={{delay:0.5, duration:0.7}}
               className="text-center p-6"
             >
               <h3 className="text-xl font-bold mb-4">Для бизнеса</h3>
@@ -222,7 +323,7 @@ export const MainImg = () => {
               Придумаем идею, цели, форматы и бюджет проекта вместе с вами
             </p>
             <motion.button
-              onClick={scrollToConsultation}
+              onClick={()=>setIsOpen(true)}
               className="bg-black text-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-gray-800 transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -242,56 +343,31 @@ export const MainImg = () => {
             <h2 className="text-4xl font-bold mb-4">Наши кейсы</h2>
           </motion.div>
           
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="flex justify-center gap-4 mb-12 flex-wrap"
-          >
-            {[
-              { key: 'all', label: 'Все' },
-              { key: 'music', label: 'Музыка' },
-              { key: 'ads', label: 'Реклама' },
-              { key: 'craft', label: 'Ремесло' },
-              { key: 'expert', label: 'Экспертные' }
-            ].map(({ key, label }) => (
-              <motion.button 
-                key={key}
-                className={`px-6 py-2 rounded-full border transition-all ${
-                  category === key 
-                    ? 'bg-[#080808] text-white border-[#080808]' 
-                    : 'bg-white text-black border-gray-300 hover:border-black'
-                }`}
-                onClick={() => setCategory(key)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {label}
-              </motion.button>
-            ))}
-          </motion.div>
-
               <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 gap-4 ">
                 {filteredCases.map((cas, index) => (
-                  <motion.div 
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
+                  <motion.a initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index*0.15}}
-                    className={`bg-white rounded-2xl relative overflow-hidden h-[230px] shadow-inner shadow-black/100 lg:h-[400px]  ${
-                      index % 3 === 0 ? 'col-span-2 lg:col-span-2'  : ''
-                    }`}
+                    transition={{ delay: index*0.15}} href={cas.link} className={`bg-white rounded-2xl relative overflow-hidden shadow-inner shadow-black/100 lg:h-[400px]  ${
+                      index % 3 === 0 ? 'col-span-2 h-[199px]  x lg:col-span-2'  : 'h-[230px] '
+                    }`}>
+                  <motion.div 
+                    key={index} 
                   >
                     <div className='text-black z-20 absolute right-2 '>
                       <GoArrowUpRight className='h-8'/>
                     </div>
-                    <div className='h-[150px] lg:h-[310px] '>
+                    <div className={` lg:h-[310px] ${index%3==0? 'h-[115px]':'h-[150px]'}`}>
                       <img src={cas.img} alt={cas.title} className=' object-cover'/>
+                    <div className='absolute inset-0 rounded-2xl shadow-[inset_0_0_100px_rgba(0,0,0,0.99)] pointer-events-none'></div>
+                      
                     </div>
                     <div className='relative z-10   flex items-end justify-center min-h-[80px]'>
-                      <h3 className='text-center text-black text-wrap'>{cas.title}</h3>
+                      <h3 className='text-center text-white text-wrap font-bold'>{cas.title}</h3>
                     </div>
-                    <div className='absolute inset-0 bg-white/20  pointer-events-none rounded-2xl'></div>
+                    <div className='absolute inset-0 bg-white/15  pointer-events-none rounded-2xl'></div>
+                   
                   </motion.div>
+                  </motion.a>
                 ))}
               </div>
         </div>
@@ -322,7 +398,7 @@ export const MainImg = () => {
         whileInView={{opacity:1,x:0}}
         transition={{duration:0.7}}
       >
-        <p className='text-white justify-center text-center font-bold'>Съемка полностьб на нас, подбирае студию, образ, продюссер ставит вас в кадре</p>
+        <p className='text-white justify-center text-center font-bold'>Съемка полность на нас, подбирае студию, образ, продюссер ставит вас в кадре</p>
       </motion.div>
       <motion.div className='w-[50vw]'></motion.div>
     </div>
@@ -407,7 +483,7 @@ export const MainImg = () => {
               transition={{ delay: 0.1 }}
             >
               <h3 className="text-xl font-bold mb-4">Телефон</h3>
-              <p className="text-gray-300">+7 (999) 123-45-67</p>
+              <a href='tel:+79963116213'className="text-gray-300">+7 (996) 311-62-13</a>
             </motion.div>
             
             <motion.div
@@ -416,7 +492,7 @@ export const MainImg = () => {
               transition={{ delay: 0.2 }}
             >
               <h3 className="text-xl font-bold mb-4">Email</h3>
-              <p className="text-gray-300">hello@production.ru</p>
+              <p className="text-gray-300">reproding@gmail.com</p>
             </motion.div>
             
             <motion.div
