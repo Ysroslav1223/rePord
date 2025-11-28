@@ -128,7 +128,7 @@ export const MainImg = () => {
       id: 4, 
       title: 'Влог из Европы', 
       category: 'expert', 
-      img: img5,
+      img: img6,
       beforeImg: '/before4.jpg',
       link: 'https://youtu.be/kbx_sgRn9ZI?si=tHSk91v42MXIll01',
       description: 'Личный бренд финансового консультанта',
@@ -148,7 +148,7 @@ export const MainImg = () => {
       id: 6, 
       title: 'Ресторан "Gambit"', 
       category: 'ads', 
-      img: img6,
+      img: img5,
       beforeImg: '/before6.jpg',
       link: 'https://www.instagram.com/restaurant_gambit?igsh=MW54cHd5c3Q4Z24yaA==',
       description: 'Продвижение через сторис и рилсы',
@@ -231,7 +231,7 @@ useEffect(() => {
       </motion.div>
           
     
-      <section className="min-h-screen w-full flex flex-col justify-center items-center text-center p-10 pt-40   bg-[radial-gradient(ellipse_70%_40%_at_bottom_right,_#2f2a37_85%,_#c8ec68_150%)] text-white relative z-0">
+      <section className="min-h-screen w-full flex flex-col justify-center items-center text-center p-10 pt-20   bg-[radial-gradient(ellipse_70%_40%_at_bottom_right,_#2f2a37_85%,_#c8ec68_250%)] text-white relative z-0">
         
         <div className="absolute inset-0 bg-[#2f2a37] opacity-60 z-0"></div>
   
@@ -311,7 +311,7 @@ useEffect(() => {
           </div>
         </div>
       </section>
-      <section ref={consultationRef} className="w-full py-20 px-10  bg-[radial-gradient(ellipse_70%_40%_at_bottom_left,_#c8ec68_0%,_#2f2a37_100%,_#080808_150%)]">
+      <section ref={consultationRef} className="w-full py-20 px-10  bg-[radial-gradient(ellipse_70%_10%_at_bottom_left,_#c8ec68_0%,_#2f2a37_100%,_#080808_150%)]">
         
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
@@ -324,7 +324,7 @@ useEffect(() => {
             </p>
             <motion.button
               onClick={()=>setIsOpen(true)}
-              className="bg-black text-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-gray-800 transition-colors"
+              className="bg-black text-white px-8 py-4 rounded-lg text-lg font-bold   border border-white"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -347,21 +347,24 @@ useEffect(() => {
                 {filteredCases.map((cas, index) => (
                   <motion.a initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index*0.15}} href={cas.link} className={`bg-white rounded-2xl relative overflow-hidden shadow-inner shadow-black/100 lg:h-[400px]  ${
-                      index % 3 === 0 ? 'col-span-2 h-[199px]  x lg:col-span-2'  : 'h-[230px] '
-                    }`}>
+                    transition={{ delay: index*0.15}} href={cas.link} className={`bg-white rounded-2xl relative overflow-hidden shadow-inner shadow-black/100 lg:h-[316px]   ${index === 0 || index === 5|| index===6 ? `
+          col-span-2 lg:col-span-2 lg:h-[310px]
+        ` : `
+          h-[230px] lg:h-[230px]
+        `}
+      `}>
                   <motion.div 
                     key={index} 
                   >
                     <div className='text-black z-20 absolute right-2 '>
                       <GoArrowUpRight className='h-8'/>
                     </div>
-                    <div className={` lg:h-[310px] ${index%3==0? 'h-[115px]':'h-[150px]'}`}>
+                    <div className={` lg:h-[10px] ${index === 0 || index === 5 || index===6 ? " h-[120px]" : "h-[150px]"}`}>
                       <img src={cas.img} alt={cas.title} className=' object-cover'/>
                     <div className='absolute inset-0 rounded-2xl shadow-[inset_0_0_100px_rgba(0,0,0,0.99)] pointer-events-none'></div>
                       
                     </div>
-                    <div className='relative z-10   flex items-end justify-center min-h-[80px]'>
+                    <div className='relative z-10   flex items-end justify-center min-h-[80px] lg:min-h-[300px]'>
                       <h3 className='text-center text-white text-wrap font-bold'>{cas.title}</h3>
                     </div>
                     <div className='absolute inset-0 bg-white/15  pointer-events-none rounded-2xl'></div>
@@ -385,15 +388,15 @@ useEffect(() => {
         initial={{opacity:0,x:100}}
         whileInView={{opacity:1,x:0}}
         transition={{duration:0.7}}
-        className='w-[80vw] h-30 bg-black/50 backdrop-blur-sm rounded-xl px-4 pt-1 mr-2 flex justify-center items-center '
+        className='w-[80vw] h-30 bg-black/50 backdrop-blur-sm rounded-xl px-4 pt-1 mr-2 flex justify-center items-center lg:w-[40vw] lg:rounded-[30px] lg:text-[18px]'
       >
         <p className='text-white text-center pb-2 font-bold'>поможем в разработке виральной идеи, от вас только задумка!</p>
       </motion.div>
     </div>
     
-    <div className='flex flex-row mt-15'>
+    <div className='flex flex-row mt-15 lg: ml-30'>
       <motion.div 
-        className='w-[80vw] h-30 bg-black/50  rounded-xl px-4 pt-1 ml-2 flex justify-center items-center'
+        className='w-[80vw] h-30 bg-black/50  rounded-xl px-4 pt-1 ml-2 flex justify-center items-center lg:w-[40vw] lg:rounded-[30px] lg:text-[18px]'
         initial={{opacity:0,x:-100}}
         whileInView={{opacity:1,x:0}}
         transition={{duration:0.7}}
@@ -409,7 +412,7 @@ useEffect(() => {
         initial={{opacity:0,x:100}}
         whileInView={{opacity:1,x:0}}
         transition={{duration:0.7}}
-        className='w-[80vw] h-30 bg-black/50  rounded-xl px-4 pt-1 ml-2 flex justify-center items-center mr-2 '
+        className='w-[80vw] h-30 bg-black/50  rounded-xl px-4 pt-1 ml-2 flex justify-center items-center mr-2 lg:w-[40vw] lg:rounded-[30px] lg:text-[18px]'
       >
         <p className='text-white justify-center text-center font-bold'>Монтаж и правки полностью на нас, от вас - принять работу и указать пожелания</p>
       </motion.div>
