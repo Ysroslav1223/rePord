@@ -126,11 +126,11 @@ export const MainImg = () => {
     },
     { 
       id: 4, 
-      title: 'Влог из Европы', 
+      title: 'Ресторан "Gambit"',  
       category: 'expert', 
       img: img6,
       beforeImg: '/before4.jpg',
-      link: 'https://youtu.be/kbx_sgRn9ZI?si=tHSk91v42MXIll01',
+      link: 'https://www.instagram.com/restaurant_gambit?igsh=MW54cHd5c3Q4Z24yaA==',
       description: 'Личный бренд финансового консультанта',
       stats: { reach: '1.2M', engagement: '22%', growth: '+350%' }
     },
@@ -146,11 +146,13 @@ export const MainImg = () => {
     },
     { 
       id: 6, 
-      title: 'Ресторан "Gambit"', 
+      
+      title: 'Влог из Европы', 
       category: 'ads', 
       img: img5,
       beforeImg: '/before6.jpg',
-      link: 'https://www.instagram.com/restaurant_gambit?igsh=MW54cHd5c3Q4Z24yaA==',
+      link: 'https://youtu.be/kbx_sgRn9ZI?si=tHSk91v42MXIll01',
+      
       description: 'Продвижение через сторис и рилсы',
       stats: { reach: '950K', engagement: '16%', growth: '+320%' }
     },
@@ -212,7 +214,7 @@ useEffect(() => {
         </div>
       </header>
        <motion.div 
-        className='fixed top-0 left-0 w-full z-50 py-4 bg-white shadow-lg'
+        className='fixed top-0 left-0 w-full z-50 py-4 bg-black shadow-lg'
         style={{
           y: logoYPosition,
           
@@ -220,11 +222,11 @@ useEffect(() => {
         }}
       >
         <div className="mx-auto px-6 flex flex-row justify-between">
-          <h3 className="text-xl font-bold text-black">
+          <h3 className="text-xl font-bold text-white">
             reProd
           </h3>
           <div className=''>
-            <button onClick={()=>setIsOpen(true)} className='border border-black rounded-4xl px-4 py-2 mt-[-5px] text-[14px] bg-black text-white hover:bg-white hover:text-black transition-colors duration-300 text-base' >Связаться</button>
+            <button onClick={()=>setIsOpen(true)} className='border border-white rounded-4xl px-4 py-2 mt-[-5px] text-[14px] bg-black text-white hover:bg-white hover:text-black transition-colors duration-300 text-base' >Связаться</button>
           </div>
           
         </div>
@@ -394,7 +396,7 @@ useEffect(() => {
       </motion.div>
     </div>
     
-    <div className='flex flex-row mt-15 lg: ml-30'>
+    <div className='flex flex-row mt-15 lg:ml-30'>
       <motion.div 
         className='w-[80vw] h-30 bg-black/50  rounded-xl px-4 pt-1 ml-2 flex justify-center items-center lg:w-[40vw] lg:rounded-[30px] lg:text-[18px]'
         initial={{opacity:0,x:-100}}
